@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Chrzciny · Klara · 16 maja 2026</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Jost:wght@300;400&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --white: #ffffff;
+      --off-white: #faf9f7;
+      --stone: #e8e4de;
+      --muted: #a8a09a;
+      --text: #2a2521;
+      --accent: #b8a898;
+      --serif: 'Cormorant Garamond', Georgia, serif;
+      --sans: 'Jost', sans-serif;
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--white);
+      color: var(--text);
+      font-family: var(--sans);
+      font-weight: 300;
+      line-height: 1.7;
+      font-size: 15px;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap;
+      padding: 1rem 1rem;
+      background: rgba(255,255,255,0.9);
+      backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--stone);
+      font-family: var(--sans); font-size: 10px;
+      letter-spacing: 0.2em; text-transform: uppercase;
+    }
+    nav a { text-decoration: none; color: var(--muted); transition: color 0.25s; white-space: nowrap; }
+    nav a:hover { color: var(--text); }
+
+    /* HERO */
+    #hero {
+      min-height: 100svh; display: flex; flex-direction: column;
+      align-items: center; justify-content: center; text-align: center;
+      padding: 7rem 2rem 5rem; background: var(--off-white);
+    }
+    .cross-ornament {
+      display: flex; align-items: center; justify-content: center;
+      gap: 1rem; margin-bottom: 2.5rem; color: var(--accent);
+    }
+    .cross-ornament .cline { width: 48px; height: 1px; background: var(--accent); opacity: 0.45; }
+    .cross-ornament .cross { font-family: var(--serif); font-size: 1rem; opacity: 0.6; }
+
+    .hero-img-wrap {
+      width: 190px; height: 190px; border-radius: 50%; overflow: hidden;
+      margin-bottom: 2.75rem; border: 1px solid var(--stone);
+      box-shadow: 0 2px 32px rgba(0,0,0,0.06); flex-shrink: 0;
+    }
+    .hero-img-placeholder {
+      width: 100%; height: 100%;
+      background: linear-gradient(135deg, #f0ebe3 0%, #e0d8ce 100%);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .hero-img-placeholder svg { opacity: 0.3; }
+
+    .eyebrow {
+      font-family: var(--sans); font-size: 10px; letter-spacing: 0.3em;
+      text-transform: uppercase; color: var(--muted); margin-bottom: 0.75rem;
+    }
+    h1 {
+      font-family: var(--serif); font-weight: 300;
+      font-size: clamp(3.2rem, 10vw, 6.5rem);
+      line-height: 1.0; letter-spacing: -0.01em; margin-bottom: 1.4rem;
+    }
+    h1 em { font-style: italic; }
+    .hero-date { font-family: var(--serif); font-size: 1.05rem; color: var(--muted); letter-spacing: 0.06em; }
+    .divider { width: 36px; height: 1px; background: var(--accent); margin: 2.25rem auto; }
+    .hero-sub { font-size: 13px; color: var(--muted); letter-spacing: 0.07em; max-width: 300px; line-height: 1.9; }
+
+    /* SECTIONS */
+    section { padding: 6rem 2rem; max-width: 720px; margin: 0 auto; }
+    section + section { border-top: 1px solid var(--stone); }
+    .section-label { font-size: 10px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.75rem; }
+    h2 { font-family: var(--serif); font-weight: 300; font-size: clamp(2rem, 6vw, 3.2rem); line-height: 1.1; margin-bottom: 2rem; }
+    h2 em { font-style: italic; }
+    p { color: #5a524c; margin-bottom: 1rem; widows: 3; orphans: 3; }
+    /* Prevent single-letter prepositions/conjunctions from being left alone at line end */
+    p, .info-value, .dish-desc, .opt-desc, .hero-sub { word-spacing: 0.01em; }
+    p:last-child { margin-bottom: 0; }
+
+    .info-row { display: flex; gap: 1rem; align-items: flex-start; margin-bottom: 1.25rem; }
+    .info-icon {
+      width: 36px; height: 36px; border: 1px solid var(--stone); border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0; margin-top: 2px; color: var(--muted);
+    }
+    .info-label { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.2rem; }
+    .info-value { color: var(--text); font-size: 15px; }
+
+    .map-placeholder {
+      width: 100%; height: 220px; background: var(--off-white);
+      border: 1px solid var(--stone); border-radius: 4px;
+      display: flex; align-items: center; justify-content: center;
+      flex-direction: column; gap: 0.6rem;
+      color: var(--muted); font-size: 11px; letter-spacing: 0.1em; margin-top: 2rem;
+    }
+    /* When you paste the real iframe, apply this class instead: */
+    .map-embed { width: 100%; height: 220px; border: 1px solid var(--stone); border-radius: 4px; margin-top: 2rem; display: block; }
+
+    /* SEATING — vertical long table */
+    #miejsca { padding: 6rem 0; border-top: 1px solid var(--stone); }
+    #miejsca .inner { max-width: 720px; margin: 0 auto; padding: 0 2rem; }
+
+    .vert-table-wrap { display: flex; justify-content: center; padding: 2.5rem 2rem 1.5rem; overflow-y: visible; }
+
+    .vert-table { display: inline-grid; grid-template-columns: 1fr 26px 1fr; align-items: center; gap: 0; }
+
+    .seat {
+      width: 50px; height: 50px; border-radius: 50%;
+      border: 1px solid var(--stone); display: flex; align-items: center; justify-content: center;
+      font-family: var(--serif); font-size: 0.78rem; color: var(--text);
+      background: var(--white); flex-shrink: 0; z-index: 2;
+      justify-self: center;
+    }
+    .seat.hi { background: var(--off-white); border-color: var(--accent); font-style: italic; }
+
+    /* vertical connector between seats in same column */
+    .seat-vgap-left  { width: 1px; height: 12px; background: var(--stone); justify-self: center; grid-column: 1; }
+    .seat-vgap-right { width: 1px; height: 12px; background: var(--stone); justify-self: center; grid-column: 3; }
+    /* table surface column */
+    .table-col { background: var(--off-white); border-left: 1px solid var(--stone); border-right: 1px solid var(--stone); align-self: stretch; grid-column: 2; }
+
+    /* MENU */
+    .time-header { display: flex; align-items: center; gap: 1rem; margin: 2.75rem 0 1.25rem; }
+    .time-header .t { font-family: var(--serif); font-size: 1.05rem; color: var(--accent); white-space: nowrap; letter-spacing: 0.05em; }
+    .time-header .hl { flex: 1; height: 1px; background: var(--stone); }
+
+    .menu-card { border: 1px solid var(--stone); padding: 1.6rem 1.75rem; background: var(--off-white); margin-bottom: 0.75rem; }
+    .course-label { font-size: 9px; letter-spacing: 0.28em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.5rem; }
+    .dish-name { font-family: var(--serif); font-size: 1.3rem; font-weight: 300; line-height: 1.2; color: var(--text); margin-bottom: 0.35rem; }
+    .dish-desc { font-size: 12px; color: var(--muted); line-height: 1.65; }
+
+    .choice-card { border: 1px solid var(--stone); background: var(--off-white); margin-bottom: 0.75rem; overflow: hidden; }
+    .choice-head { padding: 1.2rem 1.75rem 0.8rem; border-bottom: 1px solid var(--stone); }
+    .choice-opt { display: flex; align-items: flex-start; gap: 1rem; padding: 1rem 1.75rem; border-bottom: 1px solid var(--stone); }
+    .choice-opt:last-child { border-bottom: none; }
+    .bullet { width: 6px; height: 6px; border-radius: 50%; border: 1px solid var(--accent); flex-shrink: 0; margin-top: 7px; }
+    .opt-name { font-family: var(--serif); font-size: 1.15rem; font-weight: 300; color: var(--text); line-height: 1.25; margin-bottom: 0.2rem; }
+    .opt-desc { font-size: 12px; color: var(--muted); line-height: 1.6; }
+
+    .tort-card {
+      border: 1px solid var(--stone); background: var(--off-white);
+      padding: 2rem 1.75rem; text-align: center; margin-bottom: 0.75rem;
+    }
+    .tort-mark { display: flex; align-items: center; justify-content: center; gap: 0.75rem; opacity: 0.35; margin-bottom: 1rem; }
+    .tort-mark .tl { width: 32px; height: 1px; background: var(--accent); }
+    .tort-mark .tc { font-family: var(--serif); font-size: 1rem; color: var(--accent); }
+
+    .bufet-grid { display: grid; grid-template-columns: 1fr; gap: 0.75rem; }
+    @media (min-width: 520px) { .bufet-grid { grid-template-columns: 1fr 1fr; } }
+    .bufet-item { border: 1px solid var(--stone); padding: 1.3rem 1.5rem; background: var(--off-white); }
+
+    /* FOOTER */
+    footer { border-top: 1px solid var(--stone); text-align: center; padding: 3rem 2rem; font-size: 11px; color: var(--muted); letter-spacing: 0.14em; }
+    .footer-cross { font-family: var(--serif); font-size: 1.2rem; display: block; margin-bottom: 1rem; color: var(--accent); opacity: 0.45; }
+
+    /* REVEAL */
+    .reveal { opacity: 0; transform: translateY(16px); transition: opacity 0.65s ease, transform 0.65s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* MOBILE */
+    @media (max-width: 480px) {
+      nav { gap: 0.9rem; font-size: 9px; padding: 0.8rem 0.6rem; }
+      section { padding: 4.5rem 1.5rem; }
+      #miejsca { padding: 4.5rem 0; }
+      .seat { width: 42px; height: 42px; font-size: 0.7rem; }
+      .menu-card, .choice-head { padding: 1.25rem; }
+      .choice-opt { padding: 0.85rem 1.25rem; }
+      .bufet-item { padding: 1.1rem 1.1rem; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="#hero">Witamy</a>
+  <a href="#dojazd">Dojazd</a>
+  <a href="#przyjecie">Przyjęcie</a>
+  <a href="#miejsca">Miejsca</a>
+  <a href="#menu">Menu</a>
+</nav>
+
+<!-- HERO -->
+<section id="hero" style="max-width:100%; padding:7rem 2rem 5rem; min-height:100svh; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; background:var(--off-white);">
+
+  <div class="hero-img-wrap reveal">
+    <!-- Podmień na: <img src="URL_ZDJECIA" style="width:100%;height:100%;object-fit:cover"> -->
+    <div class="hero-img-placeholder">
+      <svg width="60" height="60" viewBox="0 0 64 64" fill="none">
+        <circle cx="32" cy="24" r="12" stroke="#8a7e74" stroke-width="1.2"/>
+        <path d="M10 56c0-12.15 9.85-22 22-22s22 9.85 22 22" stroke="#8a7e74" stroke-width="1.2" stroke-linecap="round"/>
+      </svg>
+    </div>
+  </div>
+
+  <p class="eyebrow reveal">Chrzciny</p>
+  <h1 class="reveal"><em>Klary</em></h1>
+  <p class="hero-date reveal">16 maja 2026 · Kamieńsk</p>
+  <div class="divider reveal"></div>
+  <p class="hero-sub reveal">Z&nbsp;radością zapraszamy was, abyście razem z&nbsp;nami świętowali ten wyjątkowy dzień.</p>
+
+</section>
+
+<!-- DOJAZD -->
+<section id="dojazd">
+  <p class="section-label reveal">01</p>
+  <h2 class="reveal">Doj<em>azd</em></h2>
+
+  <div class="info-row reveal">
+    <div class="info-icon">
+      <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.2" viewBox="0 0 24 24">
+        <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/>
+      </svg>
+    </div>
+    <div>
+      <p class="info-label">Kościół</p>
+      <p class="info-value">pw. św. Apostołów Piotra i Pawła<br>Plac Wolności 10, 97-360 Kamieńsk</p>
+    </div>
+  </div>
+
+  <div class="info-row reveal">
+    <div class="info-icon">
+      <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.2" viewBox="0 0 24 24">
+        <circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/>
+      </svg>
+    </div>
+    <div>
+      <p class="info-label">Godzina mszy</p>
+      <p class="info-value">14:00</p>
+    </div>
+  </div>
+
+  <div class="info-row reveal">
+    <div class="info-icon">
+      <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.2" viewBox="0 0 24 24">
+        <rect x="3" y="11" width="18" height="10" rx="1"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+      </svg>
+    </div>
+    <div>
+      <p class="info-label">Parking</p>
+      <p class="info-value">Pod Piekarnią GOM</p>
+    </div>
+  </div>
+
+  <!--
+  ════════════════════════════════════════════
+  JAK WSTAWIĆ MAPKĘ GOOGLE:
+  1. Wejdź na maps.google.com (lub Google Maps w przeglądarce)
+  2. Wyszukaj: Plac Wolności 10, 97-360 Kamieńsk
+  3. Kliknij ikonę "Udostępnij" (Share)
+  4. Zakładka "Osadź mapę" (Embed a map)
+  5. Skopiuj cały kod <iframe ...></iframe>
+  6. Wklej go poniżej, zamiast tego diva .map-placeholder
+  7. Dodaj do iframe: class="map-embed" i usuń jego style width/height (CSS już to obsługuje)
+  ════════════════════════════════════════════
+  -->
+  <iframe class="map-embed reveal" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1249.9013928352513!2d19.498293553588013!3d51.20428552404518!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x471a029088ccb48d%3A0xe4d1792805712bcb!2zS2_Fm2Npw7PFgiBwdy4gxZt3LiBBcG9zdG_FgsOzdyBQaW90cmEgaSBQYXfFgmE!5e0!3m2!1spl!2spl!4v1776801948419!5m2!1spl!2spl" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+
+</section>
+
+<!-- PRZYJECIE -->
+<section id="przyjecie">
+  <p class="section-label reveal">02</p>
+  <h2 class="reveal">Przy<em>jęcie</em></h2>
+
+  <p class="reveal">Po uroczystości kościelnej zapraszamy was na przyjęcie w&nbsp;Restauracji&nbsp;LAS.</p>
+
+  <div class="info-row reveal" style="margin-top:1.75rem">
+    <div class="info-icon">
+      <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.2" viewBox="0 0 24 24">
+        <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/>
+      </svg>
+    </div>
+    <div>
+      <p class="info-label">Restauracja</p>
+      <p class="info-value">Restauracja LAS<br>Aleje Jana Pawła II 1, 97-500 Radomsko</p>
+    </div>
+  </div>
+
+  <div class="info-row reveal">
+    <div class="info-icon">
+      <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.2" viewBox="0 0 24 24">
+        <circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/>
+      </svg>
+    </div>
+    <div>
+      <p class="info-label">Godziny</p>
+      <p class="info-value">15:00 – 22:00</p>
+    </div>
+  </div>
+
+  <iframe class="map-embed reveal" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2507.1600582515666!2d19.438161876599725!3d51.068595342664565!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47175558bbe7278f%3A0x88fbfca3343b357!2sRestauracja%20LAS%20w%20Radomsku!5e0!3m2!1spl!2spl!4v1776802032128!5m2!1spl!2spl" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+</section>
+
+<!-- MIEJSCA -->
+<div id="miejsca">
+  <div class="inner">
+    <p class="section-label reveal">03</p>
+    <h2 class="reveal">Miej<em>sca</em></h2>
+    <p class="reveal" style="color:#5a524c;">Jeden stół — inicjały oznaczają miejsca po obu stronach.</p>
+  </div>
+
+  <div class="vert-table-wrap reveal">
+    <div class="vert-table">
+
+      <!-- Row 1 -->
+      <div class="seat" style="grid-column:1">Z.R.</div>
+      <div class="table-col" style="grid-row:1/31; grid-column:2"></div>
+      <div class="seat" style="grid-column:3">T.P.</div>
+
+      <div class="seat-vgap-left"></div>
+      <div class="seat-vgap-right" style="grid-column:3"></div>
+
+      <div class="seat" style="grid-column:1">E.K.</div>
+      <div class="seat" style="grid-column:3">W.P.</div>
+
+      <div class="seat-vgap-left"></div>
+      <div class="seat-vgap-right" style="grid-column:3"></div>
+
+      <div class="seat" style="grid-column:1">B.K.</div>
+      <div class="seat" style="grid-column:3">R.P.</div>
+
+      <div class="seat-vgap-left"></div>
+      <div class="seat-vgap-right" style="grid-column:3"></div>
+
+      <div class="seat" style="grid-column:1">Z.P.</div>
+      <div class="seat" style="grid-column:3">M.K.</div>
+
+      <div class="seat-vgap-left"></div>
+      <div class="seat-vgap-right" style="grid-column:3"></div>
+
+      <div class="seat" style="grid-column:1">B.D.</div>
+      <div class="seat" style="grid-column:3">M.P.</div>
+
+      <div class="seat-vgap-left"></div>
+      <div class="seat-vgap-right" style="grid-column:3"></div>
+
+      <div class="seat" style="grid-column:1">J.O.</div>
+      <div class="seat" style="grid-column:3">M.P.</div>
+
+      <div class="seat-vgap-left"></div>
+      <div class="seat-vgap-right" style="grid-column:3"></div>
+
+      <div class="seat" style="grid-column:1">K.K.</div>
+      <div class="seat" style="grid-column:3">M.R.</div>
+
+      <div class="seat-vgap-left"></div>
+      <div class="seat-vgap-right" style="grid-column:3"></div>
+
+      <div class="seat" style="grid-column:1">M.K.</div>
+      <div class="seat" style="grid-column:3">S.S.</div>
+
+      <div class="seat-vgap-left"></div>
+      <div class="seat-vgap-right" style="grid-column:3"></div>
+
+      <div class="seat" style="grid-column:1">A.R.</div>
+      <div class="seat" style="grid-column:3">M.R.</div>
+
+      <div class="seat-vgap-left"></div>
+      <div class="seat-vgap-right" style="grid-column:3"></div>
+
+      <div class="seat" style="grid-column:1">T.R.</div>
+      <div class="seat" style="grid-column:3">M.P.</div>
+
+      <div class="seat-vgap-left"></div>
+      <div class="seat-vgap-right" style="grid-column:3"></div>
+
+      <div class="seat" style="grid-column:1">A.S.</div>
+      <div class="seat" style="grid-column:3">R.G.</div>
+
+      <div class="seat-vgap-left"></div>
+      <div class="seat-vgap-right" style="grid-column:3"></div>
+
+      <div class="seat" style="grid-column:1">C.S.</div>
+      <div class="seat" style="grid-column:3">M.G.</div>
+
+      <div class="seat-vgap-left"></div>
+      <div class="seat-vgap-right" style="grid-column:3"></div>
+
+      <div class="seat" style="grid-column:1">D.M.</div>
+      <div class="seat" style="grid-column:3">A.B.</div>
+
+      <div class="seat-vgap-left"></div>
+      <div class="seat-vgap-right" style="grid-column:3"></div>
+
+      <div class="seat" style="grid-column:1">N.S.</div>
+      <div class="seat" style="grid-column:3">N.B.</div>
+
+      <div class="seat-vgap-left"></div>
+      <div class="seat-vgap-right" style="grid-column:3"></div>
+
+      <div class="seat" style="grid-column:1">S.S.</div>
+      <div class="seat" style="grid-column:3">A.B.</div>
+
+    </div>
+  </div>
+</div>
+
+<!-- MENU -->
+<section id="menu" style="border-top:1px solid var(--stone);">
+  <p class="section-label reveal">04</p>
+  <h2 class="reveal">Me<em>nu</em></h2>
+
+  <!-- 15:00 -->
+  <div class="time-header reveal"><span class="t">15:00 — Obiad</span><span class="hl"></span></div>
+
+  <div class="menu-card reveal">
+    <p class="course-label">Zupa</p>
+    <p class="dish-name">Krem z pieczonego buraka</p>
+    <p class="dish-desc">Chips z boczku · kleks śmietany</p>
+  </div>
+
+  <div class="choice-card reveal">
+    <div class="choice-head">
+      <p class="course-label">Danie główne</p>
+      <p class="dish-name" style="font-size:1.05rem; margin-top:0.25rem; color:var(--muted); font-family:var(--sans); font-size:12px; letter-spacing:0.04em;">do wyboru</p>
+    </div>
+    <div class="choice-opt">
+      <span class="bullet"></span>
+      <div><p class="opt-name">Kotlet de volaille</p>
+        <p class="opt-desc">Ziemniaki z koperkiem &nbsp;·&nbsp; <em>lub</em> &nbsp;·&nbsp; pieczone ziemniaki z czosnkiem i rozmarynem</p>
+      </div>
+    </div>
+    <div class="choice-opt">
+      <span class="bullet"></span>
+      <div>
+        <p class="opt-name">Kotlet schabowy</p>
+        <p class="opt-desc">Z pieczarkami i serem<br>Ziemniaki z koperkiem &nbsp;·&nbsp; <em>lub</em> &nbsp;·&nbsp; pieczone ziemniaki z czosnkiem i rozmarynem</p>
+      </div>
+    </div>
+    <div class="choice-opt">
+      <span class="bullet"></span>
+      <div>
+        <p class="opt-name">Konfitowane kacze udko</p>
+        <p class="opt-desc">Ziemniaki z koperkiem &nbsp;·&nbsp; <em>lub</em> &nbsp;·&nbsp; pieczone ziemniaki z czosnkiem i rozmarynem</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 17:00 -->
+  <div class="time-header reveal"><span class="t">17:00 — Tort</span><span class="hl"></span></div>
+
+  <!-- 19:00 -->
+  <div class="time-header reveal"><span class="t">19:00 — Danie ciepłe</span><span class="hl"></span></div>
+
+  <div class="menu-card reveal">
+    <p class="course-label">Kolacja</p>
+    <p class="dish-name">Zrazy wołowe</p>
+    <p class="dish-desc">Kluski śląskie · surówka z modrej kapusty</p>
+  </div>
+
+  <!-- BUFET -->
+  <div class="time-header reveal"><span class="t">Zimne przekąski w bufecie</span><span class="hl"></span></div>
+  <p class="reveal" style="font-size:12px; color:var(--muted); margin-bottom:1.5rem; letter-spacing:0.03em;">Dostępne przez cały czas trwania przyjęcia</p>
+
+  <div class="bufet-grid">
+    <div class="bufet-item reveal">
+      <p class="course-label">Mięsa pieczone</p>
+      <p class="dish-name" style="font-size:1.1rem;">Półmisek pieczystych</p>
+      <p class="dish-desc">Pasztet · galantyna · schab z fromage · wąsy drobiowe · śliwka w boczku · camembert</p>
+    </div>
+    <div class="bufet-item reveal">
+      <p class="course-label">Carpaccio</p>
+      <p class="dish-name" style="font-size:1.1rem;">Burak z serem kozim</p>
+      <p class="dish-desc">Winogrona · orzechy włoskie · rukola</p>
+    </div>
+    <div class="bufet-item reveal">
+      <p class="course-label">Sałatka</p>
+      <p class="dish-name" style="font-size:1.1rem;">Brokuł, feta i kurczak</p>
+    </div>
+    <div class="bufet-item reveal">
+      <p class="course-label">Przystawka</p>
+      <p class="dish-name" style="font-size:1.1rem;">Jajka faszerowane</p>
+    </div>
+    <div class="bufet-item reveal">
+      <p class="course-label">Roladka</p>
+      <p class="dish-name" style="font-size:1.1rem;">Łosoś wędzony</p>
+      <p class="dish-desc">W cieście szpinakowym</p>
+    </div>
+    <div class="bufet-item reveal">
+      <p class="course-label">Sałatka śledziowa</p>
+      <p class="dish-name" style="font-size:1.1rem;">Śledź marynowany</p>
+      <p class="dish-desc">Ogórek kiszony · musztarda francuska · kapary</p>
+    </div>
+    <div class="bufet-item reveal" style="grid-column: 1 / -1;">
+      <p class="course-label">Z pieca</p>
+      <p class="dish-name" style="font-size:1.1rem;">Pieczone pomidory cherry</p>
+      <p class="dish-desc">Na greckim jogurcie · crudo · pieczony czosnek</p>
+    </div>
+  </div>
+
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>Chrzciny Klary · 16 maja 2026 · Kamieńsk</p>
+  <p style="margin-top:0.5rem;">Z miłością — Mama i Tata</p>
+</footer>
+
+<script>
+  // Fix widows: prevent single-letter words (z, w, i, a, o, u) from sitting alone at line end
+  document.querySelectorAll('p, .info-value, .dish-desc, .opt-desc, .opt-name, .dish-name').forEach(el => {
+    el.innerHTML = el.innerHTML.replace(/(\s)([aAiIoOuUwWzZ])\s/g, '$1$2\u00A0');
+  });
+
+  const reveals = document.querySelectorAll('.reveal');
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        setTimeout(() => e.target.classList.add('visible'), i * 55);
+        obs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  reveals.forEach(el => obs.observe(el));
+  window.addEventListener('load', () => {
+    document.querySelectorAll('#hero .reveal').forEach((el, i) => {
+      setTimeout(() => el.classList.add('visible'), 150 + i * 110);
+    });
+  });
+</script>
+</body>
+</html>
